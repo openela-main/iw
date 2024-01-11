@@ -1,14 +1,16 @@
 Name:           iw
-Version:        4.14
-Release:        5%{?dist}
+Version:        5.19
+Release:        1%{?dist}.1
 Summary:        A nl80211 based wireless configuration tool
 
 License:        ISC
-URL:            http://www.linuxwireless.org/en/users/Documentation/iw
+URL:            http://wireless.kernel.org/en/users/Documentation/iw
 Source0:        http://www.kernel.org/pub/software/network/iw/iw-%{version}.tar.xz
 
-BuildRequires:  kernel-headers >= 2.6.24 
+BuildRequires:  gcc
+BuildRequires:  kernel-headers
 BuildRequires:  libnl3-devel
+BuildRequires:  make
 BuildRequires:  pkgconfig      
 
 %description
@@ -19,16 +21,16 @@ only because most new wireless devices being sold are now SoftMAC.
 
 
 %prep
-%setup -q
+%autosetup
 
 
 %build
 export CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
-make %{?_smp_mflags}
+%{make_build}
 
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT MANDIR=%{_mandir}
+%{make_install}
 
 
 %files
@@ -38,6 +40,10 @@ make install DESTDIR=$RPM_BUILD_ROOT MANDIR=%{_mandir}
 
 
 %changelog
+* Thu Apr 20 2023 Jose Ignacio Tornos Martinez <jtornosm@redhat.com> - 5.19-1
+- Update to 5.19 from upstream
+  Resolves: rhbz#2187198
+
 * Fri Feb 09 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 4.14-5
 - Escape macros in %%changelog
 
