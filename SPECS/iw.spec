@@ -1,6 +1,6 @@
 Name:           iw
-Version:        5.9
-Release:        4%{?dist}
+Version:        5.19
+Release:        1%{?dist}.1
 Summary:        A nl80211 based wireless configuration tool
 
 License:        ISC
@@ -40,6 +40,10 @@ export CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 
 
 %changelog
+* Wed Mar 15 2023 Jose Ignacio Tornos Martinez <jtornosm@redhat.com> - 5.19-1
+- Update to 5.19 from upstream
+  Resolves: rhbz#2178549
+
 * Mon Aug 09 2021 Mohan Boddu <mboddu@redhat.com> - 5.9-4
 - Rebuilt for IMA sigs, glibc 2.34, aarch64 flags
   Related: rhbz#1991688
